@@ -1,11 +1,12 @@
 use <Pattern.scad>
-threads=8;
+threads=6;
+radius=20;
 
 p=screw_thread(10,20,2/threads,20);
 pattern(rotations(threads))
 hull_pattern(p)
 {
-    cylinder(5,1,0,true);
+    cylinder(5,radius*.5/threads,0,true);
 }
 
 
