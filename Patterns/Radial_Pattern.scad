@@ -1,12 +1,17 @@
 use <Pattern.scad>
+use <../Tree.scad>
 
 p=sphere_volume(20,[4,4,5],0);
 
 pattern(p)
 {
     rotate([0,90,0])
-    cylinder(10,1,0,true);
+    cylinder(2,1,0,true);
 };
+
+pattern(sphere_skin(20, [20,20,20],2))
+rotate([0,90,0])
+branch(5);
 
 ///Fills a specified spherical volume. Note that the north pole of each layer is the +y direction and the prime meridian is by default in the +x direction.
 ///radius: The radius of the sphere.
