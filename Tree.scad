@@ -6,7 +6,7 @@ scale_down_max=max(4/7,scale_down_min);
 angle_min=30;
 angle_max=90;
 max_protrusions=5;
-min_protrusions=2;
+min_protrusions=0;
 
 branch(3);
 
@@ -21,7 +21,7 @@ module branch(depth,scale_down=rands(scale_down_min,scale_down_max,1)[0], offset
         scale([scale_down,scale_down,scale_down])
         {
         for(i=[0:ends])
-            rotate([0,0,i*360/ends+offset])
+            rotate([0,0,i*360/(ends+1)+offset])
             rotate([0,rands(angle_min,angle_max,1)[0],0])
         branch(depth-1);
         branch(depth-1);
