@@ -1,11 +1,11 @@
 use <Pattern.scad>
 
-p=sphere_volume(20,[4,4,10],0);
+p=sphere_volume(20,[4,4,5],0);
 
 pattern(p)
 {
     rotate([0,90,0])
-    cylinder(5,1,0,true);
+    cylinder(10,1,0,true);
 };
 
 ///Fills a specified spherical volume. Note that the north pole of each layer is the +y direction and the prime meridian is by default in the +x direction.
@@ -25,7 +25,7 @@ function sphere_volume(radius,spacing,random_offset=0)=
 function sphere_skin(radius, spacing, random_offset=0)=
 [
     for(azimuth=[-90:90*spacing[1]/(PI*radius):90]) 
-        each sphere_ring(azimuth, radius, spacing,random_offset*rands(0,360,1))
+        each sphere_ring(azimuth, radius, spacing,random_offset*rands(0,360,1)[0])
 ];
     
 /// Each point on a specified latitude of a specified spherical volume.
@@ -35,7 +35,7 @@ function sphere_skin(radius, spacing, random_offset=0)=
 ///offset: The degrees by which this latitude is offset from the prime meridian.
 function sphere_ring(latitude, radius, spacing, offset=0)=
 [    
-    for(longitude=[0:180*spacing[0]/(PI*radius*cos(latitude)):360])
+    for(longitude=[offset:180*spacing[0]/(PI*radius*cos(latitude)):360+offset])
         [[1,1,1],
     [0,-longitude,latitude],
     [
